@@ -400,7 +400,10 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                 }
             });
         } else {
-            alert("Gagal mendapatkan token pembayaran dari server.");
+            } else {
+    alert('Gagal: ' + (data.error || 'Terjadi kesalahan pada server'));
+        }
+        
         }
     } catch (error) {
         console.error("Error:", error);
