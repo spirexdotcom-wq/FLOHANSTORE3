@@ -348,9 +348,11 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
         return;
     }
 
-    if (!name || !address || !phone) {
-        alert('Mohon lengkapi Nama, Alamat Lengkap, dan Nomor Handphone terlebih dahulu!');
-        return;
+    if (!nameField.value.trim() || !addressField.value.trim() || !phoneField.value.trim()) {
+    alert('Mohon lengkapi Nama, Alamat Lengkap, dan Nomor Handphone terlebih dahulu!');
+    return;
+}
+
     }
 
     let total = 0;
