@@ -333,11 +333,10 @@ function updateCartUI() {
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCartUI();
-        }
-        
+}
 
-        async function checkout() {
-        const nameField = document.getElementById('buyer-name');
+async function checkout() {
+    const nameField = document.getElementById('buyer-name');
     const addressField = document.getElementById('buyer-address');
     const phoneField = document.getElementById('buyer-phone');
 
@@ -353,8 +352,6 @@ function removeFromCart(index) {
     if (!name || !address || !phone) {
         alert('Mohon lengkapi Nama, Alamat Lengkap, dan Nomor Handphone terlebih dahulu!');
         return;
-        }
-        
     }
 
     let total = 0;
@@ -387,43 +384,33 @@ function removeFromCart(index) {
         });
 
         const data = await response.json();
-        
+
         if (data.token) {
             window.snap.pay(data.token, {
-                onSuccess: function(result){
-                    alert("Pembayaran berhasil!");
-                    console.log(result);
-                },
-                onPending: function(result){
-                    alert("Menunggu pembayaran...");
-                    console.log(result);
-                },
-                onError: function(result){
-                    alert("Pembayaran gagal!");
-                    console.log(result);
-                }
+                onSuccess: function(result){ alert("Pembayaran berhasil!"); console.log(result); },
+                onPending: function(result){ alert("Menunggu pembayaran..."); console.log(result); },
+                onError: function(result){ alert("Pembayaran gagal!"); console.log(result); }
             });
         } else {
-            } else {
-    alert('Gagal: ' + (data.error || 'Terjadi kesalahan pada server'));
-        }
-        
+            alert('Gagal: ' + (data.error || 'Terjadi kesalahan pada server'));
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("Terjadi kesalahan koneksi ke server backend.");
+        alert('Terjadi kesalahan koneksi ke server backend.');
     }
+}
+
+function openModal(modalId) {
+    const rodal = document.getElementById(modalId);
+    if(rodal) rodal.classList.remove('hidden');
+}
+
+function closeModal(modalId) {
+    const rodal = document.getElementById(modalId);
+    if(rodal) rodal.classList.add('hidden');
         }
     
-
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if(modal) modal.classList.remove('hidden');
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if(modal) modal.classList.add('hidden');
+            
         }
     </script>
 </body>
