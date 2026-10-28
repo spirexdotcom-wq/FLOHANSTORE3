@@ -182,8 +182,8 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
     <!-- FLOATING WHATSAPP -->
     <a href="https://wa.me/6281947677498?text=Halo%20Flohan%20Store,%20saya%20ingin%20bertanya%20terkait%20produk" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition z-30 text-2xl">
         <i class="fa-brands fa-whatsapp"></i>
-    </a>
-        <!-- FOOTER -->
+            </a>
+            <!-- FOOTER -->
     <footer class="bg-gray-800 text-white py-10 mt-16 px-4">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
@@ -227,21 +227,10 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                     <textarea id="buyer-address" placeholder="Alamat Lengkap (Jalan, RT/RW, Patokan)" rows="2" class="w-full border px-3 py-2 rounded text-sm focus:outline-orange-500"></textarea>
                     <input type="tel" id="buyer-phone" placeholder="Nomor Handphone / WhatsApp" class="w-full border px-3 py-2 rounded text-sm focus:outline-orange-500">
                 </div>
-<button onclick="checkout()" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 cursor-pointer flex items-center justify-center gap-2">
-    <i class="fa-solid fa-lock"></i> Checkout Pembayaran
-</button>
-
-    <!-- MODAL TERMS & CONDITIONS -->
-    <div id="tcModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white max-w-lg w-full p-6 rounded-xl shadow-xl max-h-[80vh] overflow-y-auto">
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Terms and Conditions</h3>
-            <div class="text-sm text-gray-600 space-y-2 mb-6">
-                <p>1. Selamat datang di Flohan Store. Dengan mengakses dan berbelanja di situs web kami, Anda menyetujui syarat dan ketentuan yang berlaku.</p>
-                <p>2. Seluruh produk makanan (cireng isi dan kue kering) diproduksi secara higienis. Pastikan memeriksa pesanan sebelum melakukan pembayaran.</p>
-                <p>3. Pembayaran dilakukan via transfer ke rekening BCA atas nama Ardi Zaenal Mutaqin.</p>
-                <p>4. Setelah melakukan pembayaran, mohon mengirimkan bukti transfer melalui WhatsApp untuk mempercepat proses pengiriman.</p>
+                <button onclick="checkout()" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 cursor-pointer flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-lock"></i> Checkout Pembayaran
+                </button>
             </div>
-            <button onclick="closeModal('tcModal')" class="w-full bg-orange-500 text-white py-2 rounded font-semibold cursor-pointer">Tutup</button>
         </div>
     </div>
 
@@ -274,144 +263,142 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
 
     <!-- SCRIPT -->
     <script>
-let cart = [];
+        let cart = [];
 
-function toggleCart() {
-    const modal = document.getElementById('cartModal');
-    if (modal) modal.classList.toggle('hidden');
-}
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            if (modal) modal.classList.toggle('hidden');
+        }
 
-function addToCart(name, price) {
-    const existingItem = cart.find(item => item.name === name);
-    if (existingItem) {
-        existingItem.qty += 1;
-    } else {
-        cart.push({ name, price, qty: 1 });
-    }
-    updateCartUI();
-    alert(name + ' berhasil ditambahkan ke keranjang!');
-}
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+            alert(name + ' berhasil ditambahkan ke keranjang!');
+        }
 
-function updateCartUI() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotal = document.getElementById('cart-total');
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
 
-    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-    if (cartCount) cartCount.innerText = totalQty;
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (cartCount) cartCount.innerText = totalQty;
 
-    if (cart.length === 0) {
-        if (cartItemsContainer) cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">Keranjang masih kosong</p>';
-        if (cartTotal) cartTotal.innerText = 'Rp 0';
-        return;
-    }
+            if (cart.length === 0) {
+                if (cartItemsContainer) cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">Keranjang masih kosong</p>';
+                if (cartTotal) cartTotal.innerText = 'Rp 0';
+                return;
+            }
 
-    let html = '';
-    let total = 0;
+            let html = '';
+            let total = 0;
 
-    cart.forEach((item, index) => {
-        let subtotal = item.price * item.qty;
-        total += subtotal;
-        html += `
-            <div class="flex justify-between items-center border-b pb-2">
-                <div>
-                    <h5 class="font-semibold text-sm">${item.name}</h5>
-                    <p class="text-xs text-gray-500">Rp ${item.price.toLocaleString()} x ${item.qty}</p>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="font-bold text-sm">Rp ${subtotal.toLocaleString()}</span>
-                    <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-sm">🗑️</button>
-                </div>
-            </div>
-        `;
-    });
-
-    if (cartItemsContainer) cartItemsContainer.innerHTML = html;
-    if (cartTotal) cartTotal.innerText = 'Rp ' + total.toLocaleString();
-}
-
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-}
-
-async function checkout() {
-    const nameField = document.getElementById('buyer-name');
-    const addressField = document.getElementById('buyer-address');
-    const phoneField = document.getElementById('buyer-phone');
-
-    const name = nameField ? nameField.value.trim() : '';
-    const address = addressField ? addressField.value.trim() : '';
-    const phone = phoneField ? phoneField.value.trim() : '';
-
-    if (cart.length === 0) {
-        alert('Keranjang belanja masih kosong!');
-        return;
-    }
-
-    if (!name || !address || !phone) {
-        alert('Mohon lengkapi Nama, Alamat Lengkap, dan Nomor Handphone terlebih dahulu!');
-        return;
-    }
-
-    let total = 0;
-    let items = [];
-    cart.forEach(item => {
-        total += item.price * item.qty;
-        items.push({
-            id: item.name,
-            price: item.price,
-            quantity: item.qty,
-            name: item.name
-        });
-    });
-
-    const orderId = 'FLOHAN-' + Date.now();
-
-    try {
-        const response = await fetch('https://flohanstore-3-backend.vercel.app/api/create-transaction', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                order_id: orderId,
-                gross_amount: total,
-                customer_details: {
-                    first_name: name,
-                    phone: phone
-                },
-                item_details: items
-            })
-        });
-
-        const data = await response.json();
-
-        if (data.token) {
-            window.snap.pay(data.token, {
-                onSuccess: function(result){ alert("Pembayaran berhasil!"); console.log(result); },
-                onPending: function(result){ alert("Menunggu pembayaran..."); console.log(result); },
-                onError: function(result){ alert("Pembayaran gagal!"); console.log(result); }
+            cart.forEach((item, index) => {
+                let subtotal = item.price * item.qty;
+                total += subtotal;
+                html += `
+                    <div class="flex justify-between items-center border-b pb-2">
+                        <div>
+                            <h5 class="font-semibold text-sm">${item.name}</h5>
+                            <p class="text-xs text-gray-500">Rp ${item.price.toLocaleString()} x ${item.qty}</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-sm">Rp ${subtotal.toLocaleString()}</span>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-sm">🗑️</button>
+                        </div>
+                    </div>
+                `;
             });
-        } else {
-            alert('Gagal: ' + (data.error || 'Terjadi kesalahan pada server'));
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert('Terjadi kesalahan koneksi ke server backend.');
-    }
-}
 
-function openModal(modalId) {
-    const rodal = document.getElementById(modalId);
-    if(rodal) rodal.classList.remove('hidden');
-}
-
-function closeModal(modalId) {
-    const rodal = document.getElementById(modalId);
-    if(rodal) rodal.classList.add('hidden');
+            if (cartItemsContainer) cartItemsContainer.innerHTML = html;
+            if (cartTotal) cartTotal.innerText = 'Rp ' + total.toLocaleString();
         }
-    
-            
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        async function checkout() {
+            const nameField = document.getElementById('buyer-name');
+            const addressField = document.getElementById('buyer-address');
+            const phoneField = document.getElementById('buyer-phone');
+
+            const name = nameField ? nameField.value.trim() : '';
+            const address = addressField ? addressField.value.trim() : '';
+            const phone = phoneField ? phoneField.value.trim() : '';
+
+            if (cart.length === 0) {
+                alert('Keranjang belanja masih kosong!');
+                return;
+            }
+
+            if (!name || !address || !phone) {
+                alert('Mohon lengkapi Nama, Alamat Lengkap, dan Nomor Handphone terlebih dahulu!');
+                return;
+            }
+
+            let total = 0;
+            let items = [];
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                items.push({
+                    id: item.name,
+                    price: item.price,
+                    quantity: item.qty,
+                    name: item.name
+                });
+            });
+
+            const orderId = 'FLOHAN-' + Date.now();
+
+            try {
+                const response = await fetch('https://flohanstore-3-backend.vercel.app/api/create-transaction', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        order_id: orderId,
+                        gross_amount: total,
+                        customer_details: {
+                            first_name: name,
+                            phone: phone
+                        },
+                        item_details: items
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.token) {
+                    window.snap.pay(data.token, {
+                        onSuccess: function(result){ alert("Pembayaran berhasil!"); console.log(result); },
+                        onPending: function(result){ alert("Menunggu pembayaran..."); console.log(result); },
+                        onError: function(result){ alert("Pembayaran gagal!"); console.log(result); }
+                    });
+                } else {
+                    alert('Gagal: ' + (data.error || 'Terjadi kesalahan pada server'));
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert('Terjadi kesalahan koneksi ke server backend.');
+            }
+        }
+
+        function openModal(modalId) {
+            const rodal = document.getElementById(modalId);
+            if(rodal) rodal.classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            const rodal = document.getElementById(modalId);
+            if(rodal) rodal.classList.add('hidden');
         }
     </script>
 </body>
-</html>
+    </html>
+    
