@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Flohan Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header Admin -->
+    <header class="bg-[#003153] text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold"><i class="fa-solid fa-gauge text-yellow-400 mr-2"></i> Admin Flohan Store</h1>
+            <button onclick="logoutAdmin()" class="bg-red-600 px-3 py-1.5 rounded text-sm font-semibold hover:bg-red-700">Logout</button>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="container mx-auto px-4 py-6">
+        
+        <!-- Statistik Ringkasan -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+                <p class="text-gray-500 text-sm">Total Pesanan</p>
+                <h3 id="total-orders" class="text-2xl font-bold text-gray-800">0</h3>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow border-l-4 border-green-500">
+                <p class="text-gray-500 text-sm">Total Pendapatan</p>
+                <h3 id="total-revenue" class="text-2xl font-bold text-green-600">Rp 0</h3>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow border-l-4 border-yellow-500">
+                <p class="text-gray-500 text-sm">Pesanan Perlu Diproses</p>
+                <h3 id="pending-orders" class="text-2xl font-bold text-yellow-600">0</h3>
+            </div>
+        </div>
+
+        <!-- Tabel Daftar Pesanan -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="p-4 border-b font-bold text-gray-700 flex justify-between items-center">
+                <span>Daftar Pesanan Masuk</span>
+                <button onclick="loadOrders()" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"><i class="fa-solid fa-rotate mr-1"></i> Refresh</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-600 text-sm border-b">
+                            <th class="p-3">Order ID & Waktu</th>
+                            <th class="p-3">Pelanggan</th>
+                            <th class="p-3">Total & Produk</th>
+                            <th class="p-3">Status Pembayaran</th>
+                            <th class="p-3">Status Pesanan</th>
+                            <th class="p-3">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body" class="text-sm text-gray-700">
+                        <tr>
+                            <td colspan="6" class="p-4 text-center text-gray-500">Memuat data pesanan...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Fungsi dasar pengecekan sederhana (bisa dikembangkan nanti)
+        function loadOrders() {
+            alert('Fitur sinkronisasi data akan dihubungkan dengan backend Vercel setelah database siap.');
+        }
+
+        function logoutAdmin() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
