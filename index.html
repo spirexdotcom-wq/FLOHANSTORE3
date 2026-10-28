@@ -269,9 +269,36 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
             <button onclick="closeModal('refModal')" class="w-full bg-orange-500 text-white py-2 rounded font-semibold cursor-pointer">Tutup</button>
         </div>
     </div>
+            <!-- MODAL TERMS & CONDITIONS -->
+    <div id="tcModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full p-6 rounded-xl shadow-xl max-h-[80vh] overflow-y-auto">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Terms & Conditions</h3>
+            <div class="text-sm text-gray-600 space-y-2 mb-6">
+                <p>1. Dengan mengakses dan berbelanja di Flohan Store, Anda menyetujui seluruh syarat dan ketentuan yang berlaku.</p>
+                <p>2. Setiap pesanan yang sudah dibayar melalui metode pembayaran yang tersedia akan segera diproses oleh tim kami sesuai antrean.</p>
+                <p>3. Harga produk dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya, namun harga yang berlaku adalah harga pada saat checkout.</p>
+            </div>
+            <button onclick="closeModal('tcModal')" class="w-full bg-orange-500 text-white py-2 rounded font-semibold cursor-pointer">Tutup</button>
+        </div>
+    </div>
+        
 
     <!-- SCRIPT -->
     <script>
+            function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    }
+        
         let cart = [];
 
         function toggleCart() {
