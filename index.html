@@ -191,8 +191,8 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                 </div>
 
             </div>
-    </main>
-                <!-- FLOATING WHATSAPP -->
+                </main>
+            <!-- FLOATING WHATSAPP -->
         <a href="https://wa.me/6281947677498?text=Halo%20Flohan%20Store,%20saya%20ingin%20bertanya%20terkait%20produk" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition z-30 text-2xl">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
@@ -286,7 +286,26 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                 <button onclick="closeCartPopup()" class="w-full bg-pink-500 text-white py-2 rounded-xl text-sm font-bold shadow hover:bg-pink-600 transition">Lanjut Belanja</button>
             </div>
         </div>
-                            </div>
+
+        <!-- ANIMATED PAYMENT SUCCESS POPUP -->
+        <div id="paymentSuccessModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-white/95 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-pink-200 text-center animate-bounce-in max-w-sm w-full">
+                <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+                    <i class="fa-solid fa-circle-check text-5xl text-green-500 animate-pulse"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 text-xl mb-2">Pembayaran Berhasil!</h3>
+                <p class="text-sm text-gray-600 mb-6">Selamat, pembayaran sukses! Silakan konfirmasi pesanan ke WhatsApp admin.</p>
+                <div class="space-y-2">
+                    <a id="waConfirmBtn" href="#" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-sm font-bold shadow-md flex items-center justify-center gap-2 transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Konfirmasi ke WhatsApp
+                    </a>
+                    <button onclick="closeSuccessModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2.5 rounded-xl text-sm font-semibold transition">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- SCRIPT -->
     <script>
         function openModal(modalId) {
@@ -297,6 +316,14 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) modal.classList.add('hidden');
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('paymentSuccessModal');
+            if (modal) modal.classList.add('hidden');
+            cart = [];
+            updateCartUI();
+            toggleCart();
         }
         
         let cart = [];
@@ -372,6 +399,13 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
             updateCartUI();
         }
 
+        const WA_NUMBER = "6281947677498";
+        function prepareWhatsAppLink(orderId, name, address, phone, total) {
+            let itemListText = cart.map(item => `- ${item.name} (${item.qty}x)`).join('%0A');
+            let text = `Halo Admin Flohan Store, saya sudah melakukan pembayaran sukses.%0A%0A*ID Pesanan:* ${orderId}%0A*Nama:* ${name}%0A*No HP:* ${phone}%0A*Alamat:* ${address}%0A*Detail Pesanan:*%0A${itemListText}%0A*Total Bayar:* Rp ${total.toLocaleString()}%0A%0AMohon segera diproses ya, terima kasih!`;
+            return `https://wa.me/${WA_NUMBER}?text=${text}`;
+        }
+
         async function checkout() {
             const nameField = document.getElementById('buyer-name');
             const addressField = document.getElementById('buyer-address');
@@ -423,7 +457,11 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                 const data = await response.json();
                 if (data.token) {
                     window.snap.pay(data.token, {
-                        onSuccess: function(result){ alert("Pembayaran berhasil!"); console.log(result); },
+                        onSuccess: function(result){ 
+                            const waUrl = prepareWhatsAppLink(orderId, name, address, phone, total);
+                            document.getElementById('waConfirmBtn').setAttribute('href', waUrl);
+                            document.getElementById('paymentSuccessModal').classList.remove('hidden');
+                        },
                         onPending: function(result){ alert("Menunggu pembayaran..."); console.log(result); },
                         onError: function(result){ alert("Pembayaran gagal!"); console.log(result); }
                     });
@@ -504,7 +542,8 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
             <div>
                 <h4 class="text-xl font-bold mb-2 text-pink-600">Flohan Store</h4>
                 <p class="text-sm text-gray-500">Kp Ciletuh, Desa Ciderum, Kec. Caringin, Kab. Bogor</p>
-                <p class="text-sm text-gray-500 mt-1">WhatsApp Tanya-Tanya: <a href="https://wa.me/6281947677498" class="text-green-600 underline font-medium">081947677498</a></p>
+                <p class="text-sm text-gray-500 mt-1">Kontak WhatsApp: <a href="https://wa.me/6281947677498" class="text-green-600 underline font-medium">081947677498</a></p>
+                <p class="text-sm text-gray-500 mt-1">Email: <a href="mailto:spirexdotcom@gmail.com" class="text-pink-600 underline font-medium">spirexdotcom@gmail.com</a></p>
             </div>
             <div class="flex flex-wrap gap-3">
                 <button onclick="openModal('tcModal')" class="bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs hover:bg-pink-200 transition cursor-pointer font-medium">Terms & Condition</button>
@@ -520,4 +559,3 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
 </body>
     </html>
     
-                    
