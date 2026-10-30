@@ -191,7 +191,7 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                 </div>
 
             </div>
-                </main>
+            </main>
             <!-- FLOATING WHATSAPP -->
         <a href="https://wa.me/6281947677498?text=Halo%20Flohan%20Store,%20saya%20ingin%20bertanya%20terkait%20produk" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition z-30 text-2xl">
             <i class="fa-brands fa-whatsapp"></i>
@@ -275,6 +275,34 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
             </div>
         </div>
 
+        <!-- MODAL FAQ -->
+        <div id="faqModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-white/95 backdrop-blur-md max-w-lg w-full p-6 rounded-2xl shadow-2xl max-h-[80vh] overflow-y-auto border border-pink-100">
+                <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-question text-pink-500"></i> FAQ (Pertanyaan yang Sering Diajukan)
+                </h3>
+                <div class="text-sm text-gray-600 space-y-3 mb-6">
+                    <div>
+                        <p class="font-bold text-gray-800">Q: Bagaimana cara memesan produk di Flohan Store?</p>
+                        <p>A: Pilih produk yang Anda inginkan dari katalog, klik "Pesan Sekarang" untuk memasukkannya ke keranjang, isi data pengiriman, lalu pilih metode pembayaran Midtrans atau iPaymu.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-800">Q: Apakah produk selalu *fresh* (baru dibuat)?</p>
+                        <p>A: Ya! Semua cireng isi dan kue kering di Flohan Store dibuat dengan bahan berkualitas dan higienis untuk menjaga kerenyahan serta rasanya.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-800">Q: Berapa lama waktu pengiriman pesanan?</p>
+                        <p>A: Pesanan akan diproses dan dikirimkan sesuai antrean setelah pembayaran dikonfirmasi. Estimasi waktu tergantung pada lokasi tujuan pengiriman dari Bogor.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-800">Q: Bagaimana jika ada kendala saat pembayaran?</p>
+                        <p>A: Anda bisa langsung menghubungi admin kami melalui tombol WhatsApp yang ada di pojok kanan bawah atau via kontak di bagian bawah website.</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('faqModal')" class="w-full bg-pink-500 text-white py-2.5 rounded-xl font-semibold cursor-pointer shadow-sm hover:bg-pink-600 transition">Tutup</button>
+            </div>
+        </div>
+
         <!-- ANIMATED POPUP NOTIFICATION -->
         <div id="cartAnimationPopup" class="fixed inset-0 z-50 hidden flex items-center justify-center pointer-events-none">
             <div class="bg-white/95 backdrop-blur-xl p-6 rounded-3xl shadow-2xl border border-pink-200 text-center animate-bounce-in max-w-xs mx-4 pointer-events-auto">
@@ -305,7 +333,7 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                 </div>
             </div>
         </div>
-    </div>
+            </div>
         <!-- SCRIPT -->
     <script>
         function openModal(modalId) {
@@ -549,6 +577,7 @@ data-client-key="Mid-client-IW7jn8AXPQfQlidH"></script>
                 <button onclick="openModal('tcModal')" class="bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs hover:bg-pink-200 transition cursor-pointer font-medium">Terms & Condition</button>
                 <button onclick="openModal('ppModal')" class="bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs hover:bg-pink-200 transition cursor-pointer font-medium">Privacy Policy</button>
                 <button onclick="openModal('refModal')" class="bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs hover:bg-pink-200 transition cursor-pointer font-medium">Refund Policy</button>
+                <button onclick="openModal('faqModal')" class="bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs hover:bg-pink-200 transition cursor-pointer font-medium">FAQ</button>
             </div>
         </div>
         <div class="text-center text-xs text-gray-400 mt-8 border-t border-pink-100 pt-4">
